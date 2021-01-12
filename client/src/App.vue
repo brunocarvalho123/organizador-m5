@@ -1,44 +1,24 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"/>
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-text-field
-        label="Pesquisar"
-        append-icon="mdi-magnify">
-      </v-text-field>
-
-      <v-spacer></v-spacer>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+    <Header/>
+    <router-view/>
   </v-app>
 </template>
 
+
+
 <script>
-  import HelloWorld from './components/HelloWorld';
+  import Header from './components/Header';
 
   export default {
-    name: 'App',
-
+    name:'app',
     components: {
-      HelloWorld,
-    },
+      Header
+    }
+  }
 
-    data: () => ({
-      //
-    }),
-  };
 </script>
+
+<style>
+  @import './theme/variables.css';
+</style>
