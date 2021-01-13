@@ -1,6 +1,8 @@
 :root {
     --org-blue: #1BABBF;
+    --org-light-blue: #63AFC3;
     --org-white: #FFFFFF;
     --org-grey: #757576;
     --org-light-grey: #F2F2F2;
+    --org-nice-grey: #d5d5d5;
 }
