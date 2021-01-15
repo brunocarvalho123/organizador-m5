@@ -1,6 +1,6 @@
 <template>
   <div class="header-div">
-    <div class="d-flex left-bar">
+    <div class="d-flex left-bar" v-on:click="goTohome()">
       <v-img
           alt="Vuetify Logo"
           class="shrink mr-2 logo"
@@ -50,6 +50,7 @@
     margin-top: -15px;
     background-color: white;
     border-radius: 60px;
+    cursor: pointer;
   }
   .logo {
     margin-left: 80%;
@@ -62,5 +63,10 @@
 
     data: () => ({
     }),
+    methods: {
+      goTohome: function() {
+        this.$router.push('/home');
+      }
+    }
   }
 </script>

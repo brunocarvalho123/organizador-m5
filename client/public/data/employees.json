@@ -1,6 +1,12 @@
 [
     {
-        "name": "Area 1",
+        "name": "João Antunes",
+        "icon": "JA",
+        "photo": "/img/img_0",
+        "phone_number": "911231231",
+        "email":"joao.antunes@empresa.pt",
+        "job_description": "Programador Sénior",
+        "schedule": "Seg. a Sex. 9h-18h",
         "tickets": {
             "headers": [{
                     "id": "name",
@@ -35,41 +41,37 @@
                 },
                 {
                     "id": 3,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
-                },
-                {
-                    "id": 4,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
-                },
-                {
-                    "id": 5,
                     "name": "ticket teste 1",
                     "url": "www.ticket1.com",
                     "priority": "Alta"
                 },
                 {
+                    "id": 4,
+                    "name": "ticket teste 2",
+                    "url": "www.ticket2.com",
+                    "priority": "Media"
+                },{
+                    "id": 5,
+                    "name": "ticket teste 1",
+                    "url": "www.ticket1.com",
+                    "priority": "Alta"
+                },{
                     "id": 6,
                     "name": "ticket teste 2",
                     "url": "www.ticket2.com",
                     "priority": "Media"
-                },
-                {
+                },{
                     "id": 7,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
+                    "name": "ticket teste 1",
+                    "url": "www.ticket1.com",
+                    "priority": "Alta"
                 },
                 {
                     "id": 8,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
-                },
-                {
+                    "name": "ticket teste 2",
+                    "url": "www.ticket2.com",
+                    "priority": "Media"
+                },{
                     "id": 9,
                     "name": "ticket teste 1",
                     "url": "www.ticket1.com",
@@ -80,43 +82,19 @@
                     "name": "ticket teste 2",
                     "url": "www.ticket2.com",
                     "priority": "Media"
-                },
-                {
+                },{
                     "id": 11,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
-                },
-                {
-                    "id": 12,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
-                },
-                {
-                    "id": 13,
                     "name": "ticket teste 1",
                     "url": "www.ticket1.com",
                     "priority": "Alta"
                 },
                 {
-                    "id": 14,
+                    "id": 12,
                     "name": "ticket teste 2",
                     "url": "www.ticket2.com",
                     "priority": "Media"
-                },
-                {
-                    "id": 15,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
-                },
-                {
-                    "id": 16,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
                 }
+
             ]
         },
         "processes": {
@@ -142,82 +120,23 @@
                     "id": 2,
                     "name": "Processo 2",
                     "nErrors": 5
-                },
-                {
-                    "id": 3,
-                    "name": "Processo 3",
-                    "nErrors": 5
-                },
-                {
-                    "id": 4,
-                    "name": "Processo 4",
-                    "nErrors": 5
-                },
-                {
-                    "id": 5,
-                    "name": "Processo 1",
-                    "nErrors": 5
-                },
-                {
-                    "id": 6,
-                    "name": "Processo 2",
-                    "nErrors": 5
-                },
-                {
-                    "id": 7,
-                    "name": "Processo 3",
-                    "nErrors": 5
-                },
-                {
-                    "id": 8,
-                    "name": "Processo 4",
-                    "nErrors": 5
-                },
-                {
-                    "id": 9,
-                    "name": "Processo 4",
-                    "nErrors": 5
-                },
-                {
-                    "id": 10,
-                    "name": "Processo 1",
-                    "nErrors": 5
-                },
-                {
-                    "id": 11,
-                    "name": "Processo 2",
-                    "nErrors": 5
-                },
-                {
-                    "id": 12,
-                    "name": "Processo 3",
-                    "nErrors": 5
-                },
-                {
-                    "id": 13,
-                    "name": "Processo 4",
-                    "nErrors": 5
                 }
             ]
         },
-        "employees": {
+        "areas": {
             "headers": [{
                 "id": "name",
                 "single": true,
-                "name": "Responsável",
+                "name": "Áreas",
                 "align": "left"
             }],
             "rows": [{
                     "id": 0,
-                    "name": "João Antunes"
+                    "name": "Area 1"
                 },
                 {
                     "id": 1,
-                    "name": "João blahblasd2"
-                },
-                {
-                    "id": 2,
-                    "name": "João blahblah 3"
+                    "name": "Area 2"
                 }
             ]
         },
@@ -263,20 +182,20 @@
                 {
                     "id": 4,
                     "name": "Projeto da area 3",
-                    "progress": 90,
-                    "daysLeft": 12
+                    "progress": 50,
+                    "daysLeft": 103
                 },
                 {
                     "id": 5,
-                    "name": "Projeto da area 1",
-                    "progress": 25,
-                    "daysLeft": 93
+                    "name": "Projeto da area 3",
+                    "progress": 50,
+                    "daysLeft": 103
                 },
                 {
                     "id": 6,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
+                    "name": "Projeto da area 3",
+                    "progress": 50,
+                    "daysLeft": 103
                 },
                 {
                     "id": 7,
@@ -287,62 +206,20 @@
                 {
                     "id": 8,
                     "name": "Projeto da area 3",
-                    "progress": 90,
-                    "daysLeft": 12
-                },
-                {
-                    "id": 9,
-                    "name": "Projeto da area 1",
-                    "progress": 25,
-                    "daysLeft": 93
-                },
-                {
-                    "id": 10,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 11,
-                    "name": "Projeto da area 3",
                     "progress": 50,
                     "daysLeft": 103
-                },
-                {
-                    "id": 12,
-                    "name": "Projeto da area 3",
-                    "progress": 90,
-                    "daysLeft": 12
-                },
-                {
-                    "id": 13,
-                    "name": "Projeto da area 1",
-                    "progress": 25,
-                    "daysLeft": 93
-                },
-                {
-                    "id": 14,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 15,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 16,
-                    "name": "Projeto da area 3",
-                    "progress": 90,
-                    "daysLeft": 12
                 }
             ]
         }
     },
     {
-        "name": "Area 2",
+        "name": "Pedro Almeida",
+        "icon": "PA",
+        "photo": "/img/img_1",
+        "phone_number": "912431231",
+        "email":"pedro.almeida@empresa.pt",
+        "job_description": "Programador Quase Sénior",
+        "schedule": "Seg. a Sex. 9h-18h",
         "tickets": {
             "headers": [{
                     "id": "name",
@@ -364,22 +241,16 @@
                 }
             ],
             "rows": [{
-                    "id": 17,
+                    "id": 1,
                     "name": "ticket teste 1",
                     "url": "www.ticket1.com",
                     "priority": "Alta"
                 },
                 {
-                    "id": 18,
+                    "id": 2,
                     "name": "ticket teste 2",
                     "url": "www.ticket2.com",
                     "priority": "Media"
-                },
-                {
-                    "id": 19,
-                    "name": "ticket teste 3",
-                    "url": "www.ticket3.com",
-                    "priority": "Baixa"
                 }
             ]
         },
@@ -406,10 +277,15 @@
                     "id": 2,
                     "name": "Processo 2",
                     "nErrors": 5
+                },
+                {
+                    "id": 3,
+                    "name": "Processo 3",
+                    "nErrors": 5
                 }
             ]
         },
-        "employees": {
+        "areas": {
             "headers": [{
                 "id": "name",
                 "single": true,
@@ -417,13 +293,13 @@
                 "align": "left"
             }],
             "rows": [{
-                        "id": 0,
-                        "name": "João Antunes"
-                    },
-                    {
-                        "id": 1,
-                        "name": "Pedro Almeida"
-                    }
+                    "id": 0,
+                    "name": "Area 1"
+                },
+                {
+                    "id": 1,
+                    "name": "Area 2"
+                }
             ]
         },
         "projects": {
