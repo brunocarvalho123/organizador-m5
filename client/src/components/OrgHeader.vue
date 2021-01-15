@@ -14,7 +14,7 @@
 
     <div class="middle-bar">
       <v-text-field
-      dark
+        dark
         class="search-bar"
         label="Pesquisar elementos"
         append-icon="mdi-magnify">
@@ -58,7 +58,7 @@
 
 <script>
   export default {
-    name: 'Header',
+    name: 'OrgHeader',
 
     data: () => ({
     }),

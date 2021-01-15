@@ -2,7 +2,7 @@
   <v-container v-if="area.loaded" class="main-container" fluid>
     <v-row no-gutters>
       <v-col cols="12" sm="6">
-        <v-text-field class="area-name" label="Área" v-bind:value=area.name></v-text-field>
+        <OrgTextField label="Area" v-bind:value=area.name />
       </v-col>
       <v-col cols="12" sm="2">
         <OrgTable class="employee-table"
@@ -21,7 +21,7 @@
 
       <v-col cols="12" sm="6" offset=0>
         <OrgTable class="ticket-table"
-                  height="62vh"
+                  height="64.5vh"
                   :headers="area.tickets.headers"
                   :items="area.tickets.rows"
                   add-row="true"/>
@@ -53,23 +53,10 @@
     margin-top: 2.5vh;
   }
 
-  .area-name {
-    width: 100%;
-    padding: 3vh;
-  }
-
-  .v-input {
-    font-size: 38pt !important;
-  }
-
-  .v-input .v-label {
-    font-size: 38pt !important;
-  }
-
   .ticket-table {
     width: 100%;
     padding: 3vh;
-    margin-top: -26.5vh;
+    margin-top: -29vh;
   }
 
   .project-table {
@@ -96,18 +83,19 @@
 </style>
 
 <script>
+  import axios from "axios";
   import OrgTable from '../components/OrgTable';
+  import OrgTextField from '../components/OrgTextField';
 
   export default {
-    components: { OrgTable },
+    components: { OrgTable, OrgTextField },
     name: 'Area',
     props: ['id'],
     data: () => ({
       area: {loaded: false}
     }),
     mounted: function() {
-      // Number(this.$route.params.id)
-      axios.get('./public/data/areas.json').then(response => {
+      axios.get('/data/areas.json').then(response => {
         this.area = response.data[this.$route.params.id];
         this.area.loaded = true;
       }).catch(err => {

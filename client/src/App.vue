@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header/>
+    <OrgHeader/>
     <router-view/>
   </v-app>
 </template>
@@ -8,12 +8,12 @@
 
 
 <script>
-  import Header from './components/Header';
+  import OrgHeader from './components/OrgHeader';
 
   export default {
     name:'app',
     components: {
-      Header
+      OrgHeader
     }
   }
 

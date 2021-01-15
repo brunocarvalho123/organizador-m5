@@ -1,6 +1,6 @@
 [
     {
-        "name": "Área 1",
+        "name": "Area 1",
         "tickets": {
             "headers": [{
                     "id": "name",
@@ -342,7 +342,7 @@
         }
     },
     {
-        "name": "Área 2",
+        "name": "Area 2",
         "tickets": {
             "headers": [{
                     "id": "name",
