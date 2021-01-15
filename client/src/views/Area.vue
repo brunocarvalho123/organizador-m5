@@ -1,42 +1,81 @@
 <template>
   <v-container class="main-container" fluid>
-    <v-text-field class="area-name" label="Área" v-bind:value=area.name></v-text-field>
-    <OrgTable class="ticket-table" :headers="area.tickets.headers" :items="area.tickets.rows" add-row="true"/>
-    <OrgTable class="process-table" :headers="area.processes.headers" :items="area.processes.rows" add-row="true"/>
-    <OrgTable class="employee-table" :headers="area.employees.headers" :items="area.employees.rows" add-row="true"/>
-    <OrgTable class="project-table" :headers="area.projects.headers" :items="area.projects.rows" add-row="true"/>
+    <v-row no-gutters>
+      <v-col cols="12" sm="6">
+        <v-text-field class="area-name" label="Área" v-bind:value=area.name></v-text-field>
+      </v-col>
+      <v-col cols="12" sm="2">
+        <OrgTable class="employee-table"
+                  height="36vh"
+                  :headers="area.employees.headers"
+                  :items="area.employees.rows"
+                  add-row="true"/>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <OrgTable class="process-table"
+                  height="36vh"
+                  :headers="area.processes.headers"
+                  :items="area.processes.rows"
+                  add-row="true"/>
+      </v-col>
+
+      <v-col cols="12" sm="6" offset=0>
+        <OrgTable class="ticket-table"
+                  height="62vh"
+                  :headers="area.tickets.headers"
+                  :items="area.tickets.rows"
+                  add-row="true"/>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <OrgTable class="project-table"
+                  height="36vh"
+                  :headers="area.projects.headers"
+                  :items="area.projects.rows"
+                  add-row="true"/>
+      </v-col>
+    </v-row>
+
   </v-container>
 </template>
 
 <style scoped>
   .main-container {
-    padding: 3% 5% 4% 5%;
+    /* padding: 3% 5% 4% 5%; */
+    margin-top: 2.5vh;
   }
 
   .area-name {
-    /* transform-origin: top left;
-    transform: scale(2.4); */
-    width: 16%;
+    width: 100%;
+    padding: 3vh;
   }
 
-  .v-label {
-    font-size: 70px !important;
+  .v-input {
+    font-size: 38pt !important;
+  }
+
+  .v-input .v-label {
+    font-size: 38pt !important;
   }
 
   .ticket-table {
-    width: 45%;
+    width: 100%;
+    padding: 3vh;
+    margin-top: -26.5vh;
   }
 
   .project-table {
-    width: 45%;
+    width: 100%;
+    padding: 3vh;
   }
 
   .employee-table {
-    width: 15%;
+    width: 100%;
+    padding: 3vh;
   }
 
   .process-table {
-    width: 25%;
+    width: 100%;
+    padding: 3vh;
   }
 </style>
 
@@ -59,7 +98,19 @@
             {id: 1, name: 'ticket teste 1', url: 'www.ticket1.com', priority: 'Alta'},
             {id: 2, name: 'ticket teste 2', url: 'www.ticket2.com', priority: 'Media'},
             {id: 3, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'},
-            {id: 4, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'}
+            {id: 4, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'},
+            {id: 5, name: 'ticket teste 1', url: 'www.ticket1.com', priority: 'Alta'},
+            {id: 6, name: 'ticket teste 2', url: 'www.ticket2.com', priority: 'Media'},
+            {id: 7, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'},
+            {id: 8, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'},
+            {id: 9, name: 'ticket teste 1', url: 'www.ticket1.com', priority: 'Alta'},
+            {id: 10, name: 'ticket teste 2', url: 'www.ticket2.com', priority: 'Media'},
+            {id: 11, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'},
+            {id: 12, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'},
+            {id: 13, name: 'ticket teste 1', url: 'www.ticket1.com', priority: 'Alta'},
+            {id: 14, name: 'ticket teste 2', url: 'www.ticket2.com', priority: 'Media'},
+            {id: 15, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'},
+            {id: 16, name: 'ticket teste 3', url: 'www.ticket3.com', priority: 'Baixa'}
           ]
         },
         processes: {
@@ -71,7 +122,16 @@
             {id: 1, name: 'Processo 1', nErrors: 5},
             {id: 2, name: 'Processo 2', nErrors: 5},
             {id: 3, name: 'Processo 3', nErrors: 5},
-            {id: 4, name: 'Processo 4', nErrors: 5}
+            {id: 4, name: 'Processo 4', nErrors: 5},
+            {id: 5, name: 'Processo 1', nErrors: 5},
+            {id: 6, name: 'Processo 2', nErrors: 5},
+            {id: 7, name: 'Processo 3', nErrors: 5},
+            {id: 8, name: 'Processo 4', nErrors: 5},
+            {id: 9, name: 'Processo 4', nErrors: 5},
+            {id: 10, name: 'Processo 1', nErrors: 5},
+            {id: 11, name: 'Processo 2', nErrors: 5},
+            {id: 12, name: 'Processo 3', nErrors: 5},
+            {id: 13, name: 'Processo 4', nErrors: 5},
           ]
         },
         employees: {
@@ -94,7 +154,19 @@
             {id: 1, name: 'Projeto da area 1', progress: 25, daysLeft: 93},
             {id: 2, name: 'Projeto da area 2', progress: 75, daysLeft: 35},
             {id: 3, name: 'Projeto da area 3', progress: 50, daysLeft: 103},
-            {id: 4, name: 'Projeto da area 3', progress: 90, daysLeft: 12}
+            {id: 4, name: 'Projeto da area 3', progress: 90, daysLeft: 12},
+            {id: 5, name: 'Projeto da area 1', progress: 25, daysLeft: 93},
+            {id: 6, name: 'Projeto da area 2', progress: 75, daysLeft: 35},
+            {id: 7, name: 'Projeto da area 3', progress: 50, daysLeft: 103},
+            {id: 8, name: 'Projeto da area 3', progress: 90, daysLeft: 12},
+            {id: 9, name: 'Projeto da area 1', progress: 25, daysLeft: 93},
+            {id: 10, name: 'Projeto da area 2', progress: 75, daysLeft: 35},
+            {id: 11, name: 'Projeto da area 3', progress: 50, daysLeft: 103},
+            {id: 12, name: 'Projeto da area 3', progress: 90, daysLeft: 12},
+            {id: 13, name: 'Projeto da area 1', progress: 25, daysLeft: 93},
+            {id: 14, name: 'Projeto da area 2', progress: 75, daysLeft: 35},
+            {id: 15, name: 'Projeto da area 3', progress: 50, daysLeft: 103},
+            {id: 16, name: 'Projeto da area 3', progress: 90, daysLeft: 12}
           ]
         }
       }

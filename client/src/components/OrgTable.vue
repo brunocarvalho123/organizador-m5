@@ -1,5 +1,5 @@
 <template>
-  <v-simple-table fixed-header height="300px">
+  <v-simple-table fixed-header :height=height>
     <template v-slot:default>
       <thead>
         <tr>
@@ -93,7 +93,7 @@
 <script>
   export default {
     name: 'OrgTable',
-    props: ['headers','items', 'addRow'],
+    props: ['headers','items', 'addRow', 'height'],
     data: () => ({
     }),
   }
