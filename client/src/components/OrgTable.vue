@@ -4,19 +4,19 @@
       <thead>
         <tr>
           <template v-for="header in headers">
-            <th v-if="header.leftCorner" :key="header.name" class='table-header header-left'>
+            <th v-if="header.leftCorner" :key="header.name" class='table-header header-left' :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]">
               {{header.name}}
               <!-- <v-icon class="sort-icon">mdi-arrow-up-down-bold</v-icon> -->
             </th>
-            <th v-if="header.rightCorner" :key="header.name" class='table-header header-right'>
+            <th v-if="header.rightCorner" :key="header.name" class='table-header header-right' :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]">
               {{header.name}}
               <!-- <v-icon class="sort-icon">mdi-arrow-up-down-bold</v-icon> -->
             </th>
-            <th v-if="header.single" :key="header.name" class='table-header header-single'>
+            <th v-if="header.single" :key="header.name" class='table-header header-single' :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]">
               {{header.name}}
               <!-- <v-icon class="sort-icon">mdi-arrow-up-down-bold</v-icon> -->
             </th>
-            <th v-if="header.middle" :key="header.name" class='table-header'>
+            <th v-if="header.middle" :key="header.name" class='table-header' :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]">
               {{header.name}}
               <!-- <v-icon class="sort-icon">mdi-arrow-up-down-bold</v-icon> -->
             </th>
@@ -25,8 +25,13 @@
       </thead>
       <tbody>
           <tr v-for="item in items" v-bind:key="item.id">
-            <template v-for="prop in Object.keys(item)">
-              <td  v-bind:key="prop+item.id" v-if="prop!='id'" class="table-row">{{ item[prop] }}</td>
+            <template v-for="header in headers">
+              <td v-if="header.type === 'progress-bar'" v-bind:key="header.id+item.id" :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]" class="table-row">
+                <v-progress-linear height=5 color="var(--org-grey)" :value=item[header.id]></v-progress-linear>
+              </td>
+              <td v-else v-bind:key="header.id+item.id" :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]" class="table-row">
+                {{ item[header.id] }}
+              </td>
             </template>
           </tr>
           <tr v-if="addRow">
@@ -63,6 +68,11 @@
 
   .table-row {
     font-size: 10pt !important;
+  }
+
+  .table-row-center {
+    font-size: 10pt !important;
+    text-align: center;
   }
 
   .add-row {

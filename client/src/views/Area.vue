@@ -27,6 +27,10 @@
     width: 45%;
   }
 
+  .project-table {
+    width: 45%;
+  }
+
   .employee-table {
     width: 15%;
   }
@@ -47,9 +51,9 @@
         name: 'Área 1',
         tickets: {
           headers: [
-            {leftCorner: true, name: 'Ticket'},
-            {middle: true, name: 'URL'},
-            {rightCorner: true, name: 'Prioridade'}
+            {id: 'name', leftCorner: true, name: 'Ticket', align: 'left'},
+            {id: 'url', middle: true, name: 'URL', align: 'left'},
+            {id: 'priority', rightCorner: true, name: 'Prioridade', align: 'left'}
           ],
           rows: [
             {id: 1, name: 'ticket teste 1', url: 'www.ticket1.com', priority: 'Alta'},
@@ -60,8 +64,8 @@
         },
         processes: {
           headers: [
-            {leftCorner: true, name: 'Processo'},
-            {rightCorner: true, name: 'Nº erros na última hora'}
+            {id: 'name', leftCorner: true, name: 'Processo', align: 'left'},
+            {id: 'nErrors', rightCorner: true, name: 'Nº erros na última hora', align: 'center'}
           ],
           rows: [
             {id: 1, name: 'Processo 1', nErrors: 5},
@@ -72,7 +76,7 @@
         },
         employees: {
           headers: [
-            {single: true, name: 'Responsável'}
+            {id: 'name', single: true, name: 'Responsável', align: 'left'}
           ],
           rows: [
             {id: 1, name: 'João blahblah'},
@@ -82,9 +86,9 @@
         },
         projects: {
           headers: [
-            {leftCorner: true, name: 'Projeto'},
-            {middle: true, name: 'Progresso'},
-            {rightCorner: true, name: 'Dias restantes'}
+            {id: 'name', leftCorner: true, name: 'Projeto', align: 'left'},
+            {id: 'progress', middle: true, name: 'Progresso', align: 'center', type: 'progress-bar'},
+            {id: 'daysLeft', rightCorner: true, name: 'Dias restantes', align: 'center'}
           ],
           rows: [
             {id: 1, name: 'Projeto da area 1', progress: 25, daysLeft: 93},
