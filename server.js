@@ -16,11 +16,6 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my application." });
-});
-
 // Use Routes
 // app.use('/api/items', itemRoutes);
 // app.use('/api/users', userRoutes);
