@@ -9,7 +9,7 @@
     "client": "npm run serve --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build --prefix client"
+    "heroku-postbuild": "npm run install-client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
