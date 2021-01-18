@@ -9,7 +9,8 @@
                   height="36vh"
                   :headers="area.employees.headers"
                   :items="area.employees.rows"
-                  add-row="true"/>
+                  add-row="true"
+                  path="/employee"/>
       </v-col>
       <v-col cols="12" sm="4">
         <OrgTable class="process-table"
@@ -31,7 +32,8 @@
                   height="36vh"
                   :headers="area.projects.headers"
                   :items="area.projects.rows"
-                  add-row="true"/>
+                  add-row="true"
+                  path="/project"/>
       </v-col>
     </v-row>
 

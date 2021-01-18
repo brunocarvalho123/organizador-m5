@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-          <tr v-for="item in items" v-bind:key="item.id">
+          <tr v-for="item in items" v-bind:key="item.id" @click="clickRow(item)" :class="path ? 'row-pointer' : null">
             <template v-for="header in headers">
               <td v-if="header.type === 'progress-bar'" v-bind:key="header.id+item.id" :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]" class="table-row">
                 <v-progress-linear height=5 color="var(--org-grey)" :value=item[header.id]></v-progress-linear>
@@ -88,6 +88,10 @@
     cursor: pointer;
   }
 
+  .row-pointer {
+    cursor: pointer;
+  }
+
   tbody tr:nth-of-type(even) {
     background-color: rgba(0, 0, 0, .05);
   }
@@ -101,10 +105,16 @@
 <script>
   export default {
     name: 'OrgTable',
-    props: ['headers','items', 'addRow', 'height'],
+    props: ['headers','items', 'addRow', 'height', "path"],
     methods: {
       clickAdd() {
         this.$emit('clickAdd');
+      },
+      clickRow(item) {
+        if (this.path && item.id !== undefined) {
+          this.$router.push(`${this.path}/${item.id}`);
+          return;
+        }
       }
     },
     data: () => ({

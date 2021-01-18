@@ -31,7 +31,8 @@
                   height="36vh"
                   :headers="employee.areas.headers"
                   :items="employee.areas.rows"
-                  add-row="true"/>
+                  add-row="true"
+                  path="/area"/>
       </v-col>
       <v-col cols="12" sm="4">
         <OrgTable class="process-table"
@@ -53,7 +54,8 @@
                   height="36vh"
                   :headers="employee.projects.headers"
                   :items="employee.projects.rows"
-                  add-row="true"/>
+                  add-row="true"
+                  path="/project"/>
       </v-col>
     </v-row>
 
@@ -133,7 +135,7 @@
     }),
     mounted: function() {
       axios.get('/data/employees.json').then(response => {
-        this.employee = response.data[this.$route.params.id];
+        this.employee = response.data.filter(e => e.id === Number(this.$route.params.id))[0];
         this.employee.loaded = true;
       }).catch(err => {
         console.log(err);

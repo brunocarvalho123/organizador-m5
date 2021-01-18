@@ -23,6 +23,7 @@
                       :headers="project.employees.headers"
                       :items="project.employees.rows"
                       add-row="true"
+                      path="/employee"
                       @clickAdd="openEmployeesDialog"/>
           </v-col>
           <v-col cols="12" sm="6">
@@ -304,6 +305,7 @@
         this.modified = true;
       },
       saveData: function() {
+        // debugger; // eslint-disable-line no-debugger
         console.log('todo');
       }
     }
