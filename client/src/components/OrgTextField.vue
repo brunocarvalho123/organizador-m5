@@ -1,5 +1,5 @@
 <template>
-  <v-text-field id="textField" :style="cssVars" :height=60 color="var(--org-blue)" class="area-name" :value=value>
+  <v-text-field id="textField" :style="cssVars" :height=60 color="var(--org-blue)" class="area-name" v-bind:value="value" @change="modified">
     <template v-slot:label>
       <span class='area-label'>
         {{label}}
@@ -31,6 +31,12 @@
   export default {
     name: 'OrgTextField',
     props: ['value','label','width'],
+    methods: {
+      modified(value) {
+        // debugger; // eslint-disable-line no-debugger
+        this.$emit('change', value);
+      }
+    },
     computed: {
       cssVars () {
         return{

@@ -1,5 +1,6 @@
 [
     {
+        "id": 0,
         "name": "Area 1",
         "tickets": {
             "headers": [{
@@ -208,17 +209,13 @@
                 "align": "left"
             }],
             "rows": [{
-                    "id": 0,
-                    "name": "João Antunes"
-                },
-                {
-                    "id": 1,
-                    "name": "João blahblasd2"
-                },
-                {
-                    "id": 2,
-                    "name": "João blahblah 3"
-                }
+                "id": 0,
+                "name": "João Antunes"
+            },
+            {
+                "id": 1,
+                "name": "Pedro Almeida"
+            }
             ]
         },
         "projects": {
@@ -242,106 +239,18 @@
                     "align": "center"
                 }
             ],
-            "rows": [{
-                    "id": 1,
-                    "name": "Projeto da area 1",
+            "rows": [
+                {
+                    "id": 0,
+                    "name": "Projeto de uma vida",
                     "progress": 25,
                     "daysLeft": 93
-                },
-                {
-                    "id": 2,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 3,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 4,
-                    "name": "Projeto da area 3",
-                    "progress": 90,
-                    "daysLeft": 12
-                },
-                {
-                    "id": 5,
-                    "name": "Projeto da area 1",
-                    "progress": 25,
-                    "daysLeft": 93
-                },
-                {
-                    "id": 6,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 7,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 8,
-                    "name": "Projeto da area 3",
-                    "progress": 90,
-                    "daysLeft": 12
-                },
-                {
-                    "id": 9,
-                    "name": "Projeto da area 1",
-                    "progress": 25,
-                    "daysLeft": 93
-                },
-                {
-                    "id": 10,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 11,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 12,
-                    "name": "Projeto da area 3",
-                    "progress": 90,
-                    "daysLeft": 12
-                },
-                {
-                    "id": 13,
-                    "name": "Projeto da area 1",
-                    "progress": 25,
-                    "daysLeft": 93
-                },
-                {
-                    "id": 14,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 15,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 16,
-                    "name": "Projeto da area 3",
-                    "progress": 90,
-                    "daysLeft": 12
                 }
             ]
         }
     },
     {
+        "id": 1,
         "name": "Area 2",
         "tickets": {
             "headers": [{
@@ -447,24 +356,7 @@
                     "align": "center"
                 }
             ],
-            "rows": [{
-                    "id": 1,
-                    "name": "Projeto da area 1",
-                    "progress": 25,
-                    "daysLeft": 93
-                },
-                {
-                    "id": 2,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 3,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                }
+            "rows": [
             ]
         }
     }

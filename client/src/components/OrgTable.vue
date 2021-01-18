@@ -38,7 +38,7 @@
             </template>
           </tr>
           <tr v-if="addRow">
-            <td class="add-row" :colspan="headers.length">
+            <td class="add-row" :colspan="headers.length" @click="clickAdd">
               <v-icon color="var(--org-blue)">
                 mdi-plus-circle
               </v-icon>
@@ -85,6 +85,7 @@
   .add-row {
     text-align: center;
     border-bottom: 1px solid var(--org-nice-grey);
+    cursor: pointer;
   }
 
   tbody tr:nth-of-type(even) {
@@ -101,6 +102,11 @@
   export default {
     name: 'OrgTable',
     props: ['headers','items', 'addRow', 'height'],
+    methods: {
+      clickAdd() {
+        this.$emit('clickAdd');
+      }
+    },
     data: () => ({
     }),
   }

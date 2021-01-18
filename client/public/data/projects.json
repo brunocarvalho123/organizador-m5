@@ -1,7 +1,8 @@
 [
     {
-        "name": "Projeto 3 da area 1",
-        "area": {"id": "0", "name": "Área 1"},
+        "id": 0,
+        "name": "Projeto de uma vida",
+        "area": {"id": 0, "name": "Área 1"},
         "start_date": "03/04/2018",
         "end_date": "01/05/2019",
         "summary": "Pequeno resumo sobre o grande projeto 1 :)\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel quam a diam suscipit interdum nec at ex. Cras dapibus est non tellus pulvinar euismod quis eget enim. Sed quam eros, tempor.",

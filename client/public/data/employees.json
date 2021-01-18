@@ -1,5 +1,6 @@
 [
     {
+        "id": 0,
         "name": "João Antunes",
         "icon": "JA",
         "photo": "face-01.jpg",
@@ -162,57 +163,16 @@
                 }
             ],
             "rows": [{
-                    "id": 1,
-                    "name": "Projeto da area 1",
-                    "progress": 25,
-                    "daysLeft": 93
-                },
-                {
-                    "id": 2,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 3,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 4,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 5,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 6,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 7,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                },
-                {
-                    "id": 8,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
-                }
+                "id": 0,
+                "name": "Projeto de uma vida",
+                "progress": 25,
+                "daysLeft": 93
+            }
             ]
         }
     },
     {
+        "id": 1,
         "name": "Pedro Almeida",
         "icon": "PA",
         "photo": "face-03.jpg",
@@ -323,23 +283,12 @@
                     "align": "center"
                 }
             ],
-            "rows": [{
-                    "id": 1,
-                    "name": "Projeto da area 1",
+            "rows": [
+                {
+                    "id": 0,
+                    "name": "Projeto de uma vida",
                     "progress": 25,
                     "daysLeft": 93
-                },
-                {
-                    "id": 2,
-                    "name": "Projeto da area 2",
-                    "progress": 75,
-                    "daysLeft": 35
-                },
-                {
-                    "id": 3,
-                    "name": "Projeto da area 3",
-                    "progress": 50,
-                    "daysLeft": 103
                 }
             ]
         }
