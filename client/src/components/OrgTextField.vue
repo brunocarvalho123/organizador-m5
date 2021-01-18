@@ -1,5 +1,5 @@
 <template>
-  <v-text-field id="textField"  :height=60 color="var(--org-blue)" class="area-name" :value=value>
+  <v-text-field id="textField" :style="cssVars" :height=60 color="var(--org-blue)" class="area-name" :value=value>
     <template v-slot:label>
       <span class='area-label'>
         {{label}}
@@ -10,7 +10,7 @@
 
 <style>
   .area-name {
-    width: 50%;
+    width: var(--field-width);
     padding: 3vh;
     font-size: 28pt;
     color: var(--org-blue);
@@ -30,7 +30,15 @@
 <script>
   export default {
     name: 'OrgTextField',
-    props: ['value','label'],
+    props: ['value','label','width'],
+    computed: {
+      cssVars () {
+        return{
+          /* variables you want to pass to css */
+          '--field-width': (this.width || '50%')
+        }
+      },
+    },
     data: () => ({
     }),
   }

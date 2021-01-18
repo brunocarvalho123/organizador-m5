@@ -2,7 +2,7 @@
     {
         "name": "João Antunes",
         "icon": "JA",
-        "photo": "/img/img_0",
+        "photo": "face-01.jpg",
         "phone_number": "911231231",
         "email":"joao.antunes@empresa.pt",
         "job_description": "Programador Sénior",
@@ -215,7 +215,7 @@
     {
         "name": "Pedro Almeida",
         "icon": "PA",
-        "photo": "/img/img_1",
+        "photo": "face-03.jpg",
         "phone_number": "912431231",
         "email":"pedro.almeida@empresa.pt",
         "job_description": "Programador Quase Sénior",

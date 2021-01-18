@@ -4,7 +4,7 @@
       <v-col cols="12" sm="6">
         <div class="d-flex">
           <v-avatar class="employee-photo" color="var(--org-blue)" size="18vh">
-            <img v-if="employee.photo" alt="Avatar" src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460">
+            <img v-if="employee.photo" alt="Avatar" :src="'/assets/profile_pictures/' + employee.photo">
             <span v-else class="employee-icon">{{employee.icon}}</span>
           </v-avatar>
           <v-row no-gutters>
