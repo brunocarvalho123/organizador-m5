@@ -36,7 +36,7 @@
                 {{ item[header.id] }}
               </td>
             </template>
-            <span class="hidden-table-column" @click="deleteRow($event, item.id)">
+            <span v-if="!hideDelete" class="hidden-table-column" @click="deleteRow($event, item.id)">
               <v-icon color="var(--org-blue)">
                 mdi-close-circle
               </v-icon>
@@ -114,7 +114,7 @@
     cursor: pointer;
     margin-top: 1.2vh;
     margin-left: -4vh;
-    position: absolute;
+    position: sticky;
     display: none;
   }
 </style>
@@ -122,7 +122,7 @@
 <script>
   export default {
     name: 'OrgTable',
-    props: ['headers','items', 'addRow', 'height', "path"],
+    props: ['headers','items', 'addRow', 'height', "path", "hideDelete"],
     methods: {
       clickAdd() {
         this.$emit('clickAdd');
@@ -137,6 +137,7 @@
         this.$emit('checkTask', value);
       },
       deleteRow(event, itemId) {
+        event.stopPropagation();
         this.$emit('deleteRow', {event: event, itemId: itemId});
       }
     },

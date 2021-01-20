@@ -247,8 +247,8 @@
     },
     methods: {
       reloadData: function() {
-        http.get("/projects").then(response => {
-          this.project = response.data.filter(e => e.id === this.paramsId)[0];
+        http.get(`/projects/${this.paramsId}`).then(response => {
+          this.project = response.data;
           this.project.loaded = true;
           this.modified = false
         }).catch(err => {
