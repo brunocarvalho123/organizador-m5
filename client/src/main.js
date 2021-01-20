@@ -6,6 +6,14 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  methods: {
+    getSuitableId: function(arr) {
+      return Math.max(...arr.map(row => row.id))+1;
+    }
+  }
+})
+
 new Vue({
   vuetify,
   router,

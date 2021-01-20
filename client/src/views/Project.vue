@@ -275,14 +275,14 @@
         });
       },
       createNotes: function() {
-        this.project.notes.rows.push({id: this.project.notes.rows.length+1, notes: this.dialogValue});
+        this.project.notes.rows.push({id: this.getSuitableId(this.project.notes.rows), notes: this.dialogValue});
         this.modified = true;
         this.dialogValue= '';
         this.dialogType = '';
         this.notesDialog = false;
       },
       createTasks: function() {
-        this.project.tasks.rows.push({id: this.project.tasks.length+1, done: false, name: this.dialogValue, daysLeft: this.dialogValue2});
+        this.project.tasks.rows.push({id: this.getSuitableId(this.project.tasks.rows), done: false, name: this.dialogValue, daysLeft: this.dialogValue2});
         this.modified = true;
         this.dialogValue = '';
         this.dialogValue2 = '';
@@ -309,8 +309,17 @@
         this.modified = true;
       },
       saveData: function() {
-        // debugger; // eslint-disable-line no-debugger
-        console.log('todo');
+        let payload = this.project;
+        delete payload.loaded;
+        http.put(`/projects/${this.paramsId}`, payload)
+        .then(response => {
+          this.reloadData()
+          console.log(response);
+        })
+        .catch(error => {
+          this.reloadData()
+          console.error("There was an error!", error);
+        });
       }
     }
   }
