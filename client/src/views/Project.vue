@@ -24,7 +24,8 @@
                       :items="project.employees.rows"
                       add-row="true"
                       path="/employee"
-                      @clickAdd="openEmployeesDialog"/>
+                      @clickAdd="openEmployeesDialog"
+                      @deleteRow="deleteEmployee"/>
           </v-col>
           <v-col cols="12" sm="6">
             <OrgTable class="notes-table"
@@ -32,7 +33,8 @@
                       :headers="project.notes.headers"
                       :items="project.notes.rows"
                       add-row="true"
-                      @clickAdd="openNotesDialog"/>
+                      @clickAdd="openNotesDialog"
+                      @deleteRow="deleteNote"/>
           </v-col>
         </v-row>
       </v-col>
@@ -43,7 +45,8 @@
                   :items="project.tasks.rows"
                   add-row="true"
                   @clickAdd="openTasksDialog"
-                  @checkTask="taskChecked"/>
+                  @checkTask="taskChecked"
+                  @deleteRow="deleteTask"/>
       </v-col>
     </v-row>
 
@@ -306,6 +309,18 @@
         this.modified = true;
       },
       taskChecked: function() {
+        this.modified = true;
+      },
+      deleteEmployee: function(data) {
+        this.project.employees.rows = this.project.employees.rows.filter(emp => emp.id !== data.itemId);
+        this.modified = true;
+      },
+      deleteNote: function(data) {
+        this.project.notes.rows = this.project.notes.rows.filter(note => note.id !== data.itemId);
+        this.modified = true;
+      },
+      deleteTask: function(data) {
+        this.project.tasks.rows = this.project.tasks.rows.filter(task => task.id !== data.itemId);
         this.modified = true;
       },
       saveData: function() {

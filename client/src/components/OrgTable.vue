@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-          <tr v-for="item in items" v-bind:key="item.id" @click="clickRow(item)" :class="path ? 'row-pointer' : null">
+          <tr v-for="item in items" v-bind:key="item.id" @click="clickRow(item)" :class="(path ? 'row-pointer table-rows' : 'table-rows')">
             <template v-for="header in headers">
               <td v-if="header.type === 'progress-bar'" v-bind:key="header.id+item.id" :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]" class="table-row">
                 <v-progress-linear height=5 color="var(--org-grey)" :value=item[header.id]></v-progress-linear>
@@ -36,6 +36,11 @@
                 {{ item[header.id] }}
               </td>
             </template>
+            <span class="hidden-table-column" @click="deleteRow($event, item.id)">
+              <v-icon color="var(--org-blue)">
+                mdi-close-circle
+              </v-icon>
+            </span>
           </tr>
           <tr v-if="addRow">
             <td class="add-row" :colspan="headers.length" @click="clickAdd">
@@ -100,6 +105,18 @@
     font-size: 11pt;
     color: var(--org-light-blue)
   }
+
+  .table-rows:hover .hidden-table-column {
+    display: block;
+  }
+
+  .hidden-table-column {
+    cursor: pointer;
+    margin-top: 1.2vh;
+    margin-left: -4vh;
+    position: absolute;
+    display: none;
+  }
 </style>
 
 <script>
@@ -118,6 +135,9 @@
       },
       checkTask(value) {
         this.$emit('checkTask', value);
+      },
+      deleteRow(event, itemId) {
+        this.$emit('deleteRow', {event: event, itemId: itemId});
       }
     },
     data: () => ({
