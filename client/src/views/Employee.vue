@@ -122,7 +122,7 @@
 </style>
 
 <script>
-  import axios from "axios";
+  import http from "../http-common";
   import OrgTable from '../components/OrgTable';
   import OrgTextField from '../components/OrgTextField';
 
@@ -134,7 +134,7 @@
       employee: {loaded: false}
     }),
     mounted: function() {
-      axios.get('/data/employees.json').then(response => {
+      http.get("/employees").then(response => {
         this.employee = response.data.filter(e => e.id === Number(this.$route.params.id))[0];
         this.employee.loaded = true;
       }).catch(err => {

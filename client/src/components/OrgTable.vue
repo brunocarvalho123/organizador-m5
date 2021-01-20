@@ -30,7 +30,7 @@
                 <v-progress-linear height=5 color="var(--org-grey)" :value=item[header.id]></v-progress-linear>
               </td>
               <td v-else-if="header.type === 'checkbox'" v-bind:key="header.id+item.id" :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]" class="table-row table-checkbox">
-                <v-checkbox v-model="item[header.id]" height=5 color="var(--org-blue)"></v-checkbox>
+                <v-checkbox v-on:change="checkTask" v-model="item[header.id]" height=5 color="var(--org-blue)"></v-checkbox>
               </td>
               <td v-else v-bind:key="header.id+item.id" :style="[header.align != undefined ? {'text-align': header.align} : {'text-align': 'left'}]" class="table-row">
                 {{ item[header.id] }}
@@ -115,6 +115,9 @@
           this.$router.push(`${this.path}/${item.id}`);
           return;
         }
+      },
+      checkTask(value) {
+        this.$emit('checkTask', value);
       }
     },
     data: () => ({

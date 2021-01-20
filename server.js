@@ -2,6 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const projects = require("./routes/api/projects");
+const areas = require("./routes/api/areas");
+const employees = require("./routes/api/employees");
+
 const app = express();
 
 const path = require("path");
@@ -19,9 +23,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use Routes
-// app.use('/api/items', itemRoutes);
-// app.use('/api/users', userRoutes);
-// app.use('/api/auth', authRoutes);
+app.use('/api/projects', projects);
+app.use('/api/employees', employees);
+app.use('/api/areas', areas);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

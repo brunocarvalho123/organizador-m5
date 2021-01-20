@@ -42,7 +42,8 @@
                   :headers="project.tasks.headers"
                   :items="project.tasks.rows"
                   add-row="true"
-                  @clickAdd="openTasksDialog"/>
+                  @clickAdd="openTasksDialog"
+                  @checkTask="taskChecked"/>
       </v-col>
     </v-row>
 
@@ -210,7 +211,7 @@
 </style>
 
 <script>
-  import axios from "axios";
+  import http from "../http-common";
   import OrgTable from '../components/OrgTable';
   import OrgTextField from '../components/OrgTextField';
 
@@ -234,7 +235,7 @@
     }),
     mounted: function() {
       this.paramsId = Number(this.$route.params.id);
-      axios.get('/data/areas.json').then(response => {
+      http.get("/areas").then(response => {
         this.availableAreas = response.data.map((e) => {return {id: e.id, name: e.name}});
       }).catch(err => {
         console.log(err);
@@ -243,7 +244,7 @@
     },
     methods: {
       reloadData: function() {
-        axios.get('/data/projects.json').then(response => {
+        http.get("/projects").then(response => {
           this.project = response.data.filter(e => e.id === this.paramsId)[0];
           this.project.loaded = true;
           this.modified = false
@@ -264,7 +265,7 @@
         this.tasksDialog = true;
       },
       openEmployeesDialog: function() {
-        axios.get('/data/employees.json').then(response => {
+        http.get("/employees").then(response => {
           this.availableEmployees = response.data.map((e) => {return {id: e.id, name: e.name}});
           this.dialogType = 'Responsável';
           this.dialogValue = '';
@@ -302,6 +303,9 @@
       },
       changeArea: function(data) {
         this.project.area.name = this.availableAreas.filter(e => e.id == data)[0].name;
+        this.modified = true;
+      },
+      taskChecked: function() {
         this.modified = true;
       },
       saveData: function() {

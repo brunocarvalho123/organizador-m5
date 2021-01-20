@@ -85,7 +85,7 @@
 </style>
 
 <script>
-  import axios from "axios";
+  import http from "../http-common";
   import OrgTable from '../components/OrgTable';
   import OrgTextField from '../components/OrgTextField';
 
@@ -97,7 +97,7 @@
       area: {loaded: false}
     }),
     mounted: function() {
-      axios.get('/data/areas.json').then(response => {
+      http.get("/areas").then(response => {
         this.area = response.data[this.$route.params.id];
         this.area.loaded = true;
       }).catch(err => {
