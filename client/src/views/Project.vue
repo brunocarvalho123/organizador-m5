@@ -249,6 +249,9 @@
       reloadData: function() {
         http.get(`/projects/${this.paramsId}`).then(response => {
           this.project = response.data;
+          if (this.project.area === undefined) {
+            this.project.area = {id: undefined};
+          }
           this.project.loaded = true;
           this.modified = false
         }).catch(err => {

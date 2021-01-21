@@ -3,8 +3,11 @@ const router = express.Router();
 const fs = require('fs');
 
 const projectsFile = './data/projects.json';
+const projectTemplateFile = './data/project_template.json';
 const employeesFile = './data/employees.json';
 const areasFile = './data/areas.json';
+
+const getSuitableId = require('../../common/common_functions')
 
 /**
  * @route   GET api/projects
@@ -55,7 +58,7 @@ router.get('/:id', (req, res) => {
       });
     }
 
-    if (project.area !== undefined) {
+    if (project.area !== undefined && project.area !== -1) {
       const areas = JSON.parse(fs.readFileSync(areasFile));
       if (!areas) throw Error('No areas');
       project.area = {id: project.area, name: areas.filter(area => project.area === area.id)[0].name}
@@ -105,21 +108,22 @@ router.put('/:id', async (req, res) => {
 */
 router.post('/', async (req, res) => {
   try {
-    const projectsRaw = fs.readFileSync(projectsFile);
-    const projects = JSON.parse(projectsRaw);
+    const projects = JSON.parse(fs.readFileSync(projectsFile));
     if (!projects) throw Error('No projects');
 
-    if (!req.body.hasOwnProperty('id')) throw Error('Id not defined');
-    if (projects.filter(proj => proj.id === Number(req.body.id)).length > 0) throw Error('Project already exists');
+    let projectTemplate = JSON.parse(fs.readFileSync(projectTemplateFile));
+    if (!projectTemplate) throw Error('No projectTemplate');
 
-    if (req.body.area !== undefined && req.body.area.id !== undefined) req.body.area = req.body.area.id;
-    if (req.body.employees !== undefined) req.body.employees.rows = req.body.employees.rows.map(emp => emp.id);
+    if (!req.body.hasOwnProperty('name')) throw Error('name not defined');
+    projectTemplate.name = req.body.name;
+    if (req.body.employee) projectTemplate.employees.rows = [req.body.employee];
+    projectTemplate.id = getSuitableId(projects);
 
-    projects.push(req.body);
+    projects.push(projectTemplate);
 
     const payload = JSON.stringify(projects, null, 2);
     fs.writeFileSync(projectsFile, payload);
-    res.status(200).json(req.body);
+    res.status(200).json(projectTemplate.id);
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }

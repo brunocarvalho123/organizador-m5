@@ -97,8 +97,8 @@
       area: {loaded: false}
     }),
     mounted: function() {
-      http.get("/areas").then(response => {
-        this.area = response.data[this.$route.params.id];
+      http.get(`/areas/${this.$route.params.id}`).then(response => {
+        this.area = response.data;
         this.area.loaded = true;
       }).catch(err => {
         console.log(err);

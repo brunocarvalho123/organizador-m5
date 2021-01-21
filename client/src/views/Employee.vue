@@ -230,6 +230,8 @@
       dialogValue: "",
       dialogType: "",
       availableAreas: [],
+      availableProjects: [],
+      newProjects: [],
       areasDialog: false,
       projectsDialog: false
     }),
@@ -279,7 +281,9 @@
         this.projectsDialog = true;
       },
       createProject: function() {
-        this.employee.projects.rows.push({id: this.getSuitableId(this.employee.projects.rows), name: this.dialogValue});
+        let newProject = {id: this.getSuitableId(this.employee.projects.rows), name: this.dialogValue};
+        this.employee.projects.rows.push(newProject);
+        this.newProjects.push(newProject);
         this.modified = true;
         this.dialogValue = '';
         this.dialogType = '';
@@ -289,7 +293,14 @@
         this.employee.projects.rows = this.employee.projects.rows.filter(project => project.id !== data.itemId);
         this.modified = true;
       },
-      saveData: function() {
+      async saveData () {
+        for (let idx = 0; idx < this.newProjects.length; idx++){
+          let newProject = this.newProjects[idx];
+          newProject.employee = this.employee.id;
+          let response = await http.post('/projects', newProject);
+          this.employee.projects.rows.filter(proj => proj.name === this.newProjects[idx].name)[0].id = response.data;
+        }
+
         let payload = this.employee;
         delete payload.loaded;
         http.put(`/employees/${this.employeeId}`, payload)
