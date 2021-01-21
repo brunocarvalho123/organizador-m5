@@ -1,8 +1,13 @@
 const express = require('express');
+const moment = require('moment');
 const router = express.Router();
 const fs = require('fs');
 
 const employeesFile = './data/employees.json';
+const projectsFile = './data/projects.json';
+const areasFile = './data/areas.json';
+const processesFile = './data/processes.json';
+const ticketsFile = './data/tickets.json';
 
 /**
  * @route   GET api/employees
@@ -11,8 +16,7 @@ const employeesFile = './data/employees.json';
  */
 router.get('/', (req, res) => {
   try {
-    const employeesRaw = fs.readFileSync(employeesFile);
-    const employees = JSON.parse(employeesRaw);
+    const employees = JSON.parse(fs.readFileSync(employeesFile));
     if (!employees) throw Error('No employees');
 
     res.status(200).json(employees);
@@ -29,11 +33,91 @@ router.get('/', (req, res) => {
  */
 router.get('/:id', (req, res) => {
   try {
-    const employeesRaw = fs.readFileSync(employeesFile);
-    const employees = JSON.parse(employeesRaw);
+    const employees = JSON.parse(fs.readFileSync(employeesFile));
     if (!employees) throw Error('No employees');
+
     const employee = employees.filter(emp => emp.id === Number(req.params.id))[0];
     if (!employee) throw Error('employee not found');
+
+    if (employee.projects.rows.length > 0) {
+      const projects = JSON.parse(fs.readFileSync(projectsFile));
+      if (!projects) throw Error('No projects');
+
+      employee.projects.rows = projects.filter(project => employee.projects.rows.includes(project.id));
+      const projectHeaders = employee.projects.headers.map(header => header.id);
+      projectHeaders.push('id');
+
+      employee.projects.rows.forEach(project => {
+        project.progress = ((project.tasks.rows.filter(task => task.done).length / project.tasks.rows.length).toFixed(2) * 100)
+
+        if (project.start_date && project.end_date) {
+          const todayDate = new Date();
+          const endDate = moment(project.end_date, "DD/MM/YYYY").toDate();
+
+          if (todayDate.getTime() <= endDate.getTime() ) {
+            project.daysLeft = Math.round((endDate.getTime() - todayDate.getTime()) / (1000 * 3600 * 24));
+          } else {
+            project.daysLeft = 0;
+          }
+        }
+      });
+
+      employee.projects.rows.forEach(project => {
+        Object.keys(project).forEach(key => {
+          if (!projectHeaders.includes(key)) {
+            delete project.key;
+          }
+        });
+      });
+    }
+    if (employee.processes.rows.length > 0) {
+      const processes = JSON.parse(fs.readFileSync(processesFile));
+      if (!processes) throw Error('No processes');
+
+      employee.processes.rows = processes.filter(process => employee.processes.rows.includes(process.id));
+      const processHeaders = employee.processes.headers.map(header => header.id);
+      processHeaders.push('id');
+
+      employee.processes.rows.forEach(process => {
+        Object.keys(process).forEach(key => {
+          if (!processHeaders.includes(key)) {
+            delete process.key;
+          }
+        });
+      });
+    }
+    if (employee.tickets.rows.length > 0) {
+      const tickets = JSON.parse(fs.readFileSync(ticketsFile));
+      if (!tickets) throw Error('No tickets');
+
+      employee.tickets.rows = tickets.filter(ticket => employee.tickets.rows.includes(ticket.id));
+      const ticketHeaders = employee.tickets.headers.map(header => header.id);
+      ticketHeaders.push('id');
+
+      employee.tickets.rows.forEach(ticket => {
+        Object.keys(ticket).forEach(key => {
+          if (!ticketHeaders.includes(key)) {
+            delete ticket.key;
+          }
+        });
+      });
+    }
+    if (employee.areas.rows.length > 0) {
+      const areas = JSON.parse(fs.readFileSync(areasFile));
+      if (!areas) throw Error('No areas');
+
+      employee.areas.rows = areas.filter(area => employee.areas.rows.includes(area.id));
+      const areaHeaders = employee.areas.headers.map(header => header.id);
+      areaHeaders.push('id');
+
+      employee.areas.rows.forEach(area => {
+        Object.keys(area).forEach(key => {
+          if (!areaHeaders.includes(key)) {
+            delete area.key;
+          }
+        });
+      });
+    }
 
     res.status(200).json(employee);
   } catch (e) {
@@ -55,6 +139,11 @@ router.put('/:id', async (req, res) => {
     if (employees.filter(emp => emp.id === Number(req.params.id)).length <= 0) throw Error('employee not found');
     if (Number(req.body.id) !== Number(req.params.id)) throw Error('Cant update id');
     if (!req.body.hasOwnProperty('id')) throw Error('Id not defined');
+
+    req.body.areas.rows = req.body.areas.rows.map(area => area.id);
+    req.body.projects.rows = req.body.projects.rows.map(project => project.id);
+    req.body.tickets.rows = req.body.tickets.rows.map(ticket => ticket.id);
+    req.body.processes.rows = req.body.processes.rows.map(process => process.id);
 
     employees = employees.filter(emp => emp.id !== Number(req.params.id));
     employees.push(req.body);

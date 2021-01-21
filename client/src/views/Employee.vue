@@ -57,7 +57,9 @@
                   :headers="employee.projects.headers"
                   :items="employee.projects.rows"
                   add-row="true"
-                  path="/project"/>
+                  path="/project"
+                  @clickAdd="openProjectDialog"
+                  @deleteRow="deleteProject"/>
       </v-col>
     </v-row>
 
@@ -76,6 +78,27 @@
             Cancelar
           </v-btn>
           <v-btn color="var(--org-blue)" text @click="createArea()">
+            Criar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="projectsDialog" width="500">
+      <v-card>
+        <v-card-title class="headline">
+          Adicionar projeto
+        </v-card-title>
+        <v-card-text>
+          <v-text-field :name="Math.random()" color="var(--org-blue)" :label=dialogType v-model=dialogValue></v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="var(--org-grey)" text @click="projectsDialog=false">
+            Cancelar
+          </v-btn>
+          <v-btn color="var(--org-blue)" text @click="createProject()">
             Criar
           </v-btn>
         </v-card-actions>
@@ -205,8 +228,10 @@
       employeeId: 0,
       modified: false,
       dialogValue: "",
+      dialogType: "",
       availableAreas: [],
-      areasDialog: false
+      areasDialog: false,
+      projectsDialog: false
     }),
     mounted: function() {
       this.employeeId = this.$route.params.id;
@@ -246,6 +271,22 @@
       },
       deleteArea: function(data) {
         this.employee.areas.rows = this.employee.areas.rows.filter(area => area.id !== data.itemId);
+        this.modified = true;
+      },
+      openProjectDialog: function() {
+        this.dialogType = 'Projeto';
+        this.dialogValue = '';
+        this.projectsDialog = true;
+      },
+      createProject: function() {
+        this.employee.projects.rows.push({id: this.getSuitableId(this.employee.projects.rows), name: this.dialogValue});
+        this.modified = true;
+        this.dialogValue = '';
+        this.dialogType = '';
+        this.projectsDialog = false;
+      },
+      deleteProject: function(data) {
+        this.employee.projects.rows = this.employee.projects.rows.filter(project => project.id !== data.itemId);
         this.modified = true;
       },
       saveData: function() {

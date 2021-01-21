@@ -1,296 +1,182 @@
 [
-    {
-        "id": 0,
-        "name": "João Antunes",
-        "icon": "JA",
-        "photo": "face-01.jpg",
-        "phone_number": "911231231",
-        "email":"joao.antunes@empresa.pt",
-        "job_description": "Programador Sénior",
-        "schedule": "Seg. a Sex. 9h-18h",
-        "tickets": {
-            "headers": [{
-                    "id": "name",
-                    "leftCorner": true,
-                    "name": "Ticket",
-                    "align": "left"
-                },
-                {
-                    "id": "url",
-                    "middle": true,
-                    "name": "URL",
-                    "align": "left"
-                },
-                {
-                    "id": "priority",
-                    "rightCorner": true,
-                    "name": "Prioridade",
-                    "align": "left"
-                }
-            ],
-            "rows": [{
-                    "id": 1,
-                    "name": "ticket teste 1",
-                    "url": "www.ticket1.com",
-                    "priority": "Alta"
-                },
-                {
-                    "id": 2,
-                    "name": "ticket teste 2",
-                    "url": "www.ticket2.com",
-                    "priority": "Media"
-                },
-                {
-                    "id": 3,
-                    "name": "ticket teste 1",
-                    "url": "www.ticket1.com",
-                    "priority": "Alta"
-                },
-                {
-                    "id": 4,
-                    "name": "ticket teste 2",
-                    "url": "www.ticket2.com",
-                    "priority": "Media"
-                },{
-                    "id": 5,
-                    "name": "ticket teste 1",
-                    "url": "www.ticket1.com",
-                    "priority": "Alta"
-                },{
-                    "id": 6,
-                    "name": "ticket teste 2",
-                    "url": "www.ticket2.com",
-                    "priority": "Media"
-                },{
-                    "id": 7,
-                    "name": "ticket teste 1",
-                    "url": "www.ticket1.com",
-                    "priority": "Alta"
-                },
-                {
-                    "id": 8,
-                    "name": "ticket teste 2",
-                    "url": "www.ticket2.com",
-                    "priority": "Media"
-                },{
-                    "id": 9,
-                    "name": "ticket teste 1",
-                    "url": "www.ticket1.com",
-                    "priority": "Alta"
-                },
-                {
-                    "id": 10,
-                    "name": "ticket teste 2",
-                    "url": "www.ticket2.com",
-                    "priority": "Media"
-                },{
-                    "id": 11,
-                    "name": "ticket teste 1",
-                    "url": "www.ticket1.com",
-                    "priority": "Alta"
-                },
-                {
-                    "id": 12,
-                    "name": "ticket teste 2",
-                    "url": "www.ticket2.com",
-                    "priority": "Media"
-                }
-
-            ]
+  {
+    "id": 0,
+    "name": "João Antunes 2",
+    "icon": "JA",
+    "photo": "face-01.jpg",
+    "phone_number": "911231231",
+    "email": "joao.antunes@empresa.pt",
+    "job_description": "Programador Sénior",
+    "schedule": "Seg. a Sex. 9h-18h",
+    "tickets": {
+      "headers": [
+        {
+          "id": "name",
+          "leftCorner": true,
+          "name": "Ticket",
+          "align": "left"
         },
-        "processes": {
-            "headers": [{
-                    "id": "name",
-                    "leftCorner": true,
-                    "name": "Processo",
-                    "align": "left"
-                },
-                {
-                    "id": "nErrors",
-                    "rightCorner": true,
-                    "name": "Nº erros na última hora",
-                    "align": "center"
-                }
-            ],
-            "rows": [{
-                    "id": 1,
-                    "name": "Processo 1",
-                    "nErrors": 5
-                },
-                {
-                    "id": 2,
-                    "name": "Processo 2",
-                    "nErrors": 5
-                }
-            ]
+        {
+          "id": "url",
+          "middle": true,
+          "name": "URL",
+          "align": "left"
         },
-        "areas": {
-            "headers": [{
-                "id": "name",
-                "single": true,
-                "name": "Áreas",
-                "align": "left"
-            }],
-            "rows": [{
-                    "id": 0,
-                    "name": "Area 1"
-                },
-                {
-                    "id": 1,
-                    "name": "Area 2"
-                }
-            ]
-        },
-        "projects": {
-            "headers": [{
-                    "id": "name",
-                    "leftCorner": true,
-                    "name": "Projeto",
-                    "align": "left"
-                },
-                {
-                    "id": "progress",
-                    "middle": true,
-                    "name": "Progresso",
-                    "align": "center",
-                    "type": "progress-bar"
-                },
-                {
-                    "id": "daysLeft",
-                    "rightCorner": true,
-                    "name": "Dias restantes",
-                    "align": "center"
-                }
-            ],
-            "rows": [{
-                "id": 0,
-                "name": "Projeto de uma vida",
-                "progress": 25,
-                "daysLeft": 93
-            }
-            ]
+        {
+          "id": "priority",
+          "rightCorner": true,
+          "name": "Prioridade",
+          "align": "left"
         }
+      ],
+      "rows": []
     },
-    {
-        "id": 1,
-        "name": "Pedro Almeida",
-        "icon": "PA",
-        "photo": "face-03.jpg",
-        "phone_number": "912431231",
-        "email":"pedro.almeida@empresa.pt",
-        "job_description": "Programador Quase Sénior",
-        "schedule": "Seg. a Sex. 9h-18h",
-        "tickets": {
-            "headers": [{
-                    "id": "name",
-                    "leftCorner": true,
-                    "name": "Ticket",
-                    "align": "left"
-                },
-                {
-                    "id": "url",
-                    "middle": true,
-                    "name": "URL",
-                    "align": "left"
-                },
-                {
-                    "id": "priority",
-                    "rightCorner": true,
-                    "name": "Prioridade",
-                    "align": "left"
-                }
-            ],
-            "rows": [{
-                    "id": 1,
-                    "name": "ticket teste 1",
-                    "url": "www.ticket1.com",
-                    "priority": "Alta"
-                },
-                {
-                    "id": 2,
-                    "name": "ticket teste 2",
-                    "url": "www.ticket2.com",
-                    "priority": "Media"
-                }
-            ]
+    "processes": {
+      "headers": [
+        {
+          "id": "name",
+          "leftCorner": true,
+          "name": "Processo",
+          "align": "left"
         },
-        "processes": {
-            "headers": [{
-                    "id": "name",
-                    "leftCorner": true,
-                    "name": "Processo",
-                    "align": "left"
-                },
-                {
-                    "id": "nErrors",
-                    "rightCorner": true,
-                    "name": "Nº erros na última hora",
-                    "align": "center"
-                }
-            ],
-            "rows": [{
-                    "id": 1,
-                    "name": "Processo 1",
-                    "nErrors": 5
-                },
-                {
-                    "id": 2,
-                    "name": "Processo 2",
-                    "nErrors": 5
-                },
-                {
-                    "id": 3,
-                    "name": "Processo 3",
-                    "nErrors": 5
-                }
-            ]
-        },
-        "areas": {
-            "headers": [{
-                "id": "name",
-                "single": true,
-                "name": "Responsável",
-                "align": "left"
-            }],
-            "rows": [{
-                    "id": 0,
-                    "name": "Area 1"
-                },
-                {
-                    "id": 1,
-                    "name": "Area 2"
-                }
-            ]
-        },
-        "projects": {
-            "headers": [{
-                    "id": "name",
-                    "leftCorner": true,
-                    "name": "Projeto",
-                    "align": "left"
-                },
-                {
-                    "id": "progress",
-                    "middle": true,
-                    "name": "Progresso",
-                    "align": "center",
-                    "type": "progress-bar"
-                },
-                {
-                    "id": "daysLeft",
-                    "rightCorner": true,
-                    "name": "Dias restantes",
-                    "align": "center"
-                }
-            ],
-            "rows": [
-                {
-                    "id": 0,
-                    "name": "Projeto de uma vida",
-                    "progress": 25,
-                    "daysLeft": 93
-                }
-            ]
+        {
+          "id": "nErrors",
+          "rightCorner": true,
+          "name": "Nº erros na última hora",
+          "align": "center"
         }
+      ],
+      "rows": []
+    },
+    "areas": {
+      "headers": [
+        {
+          "id": "name",
+          "single": true,
+          "name": "Áreas",
+          "align": "left"
+        }
+      ],
+      "rows": [
+        0,
+        1
+      ]
+    },
+    "projects": {
+      "headers": [
+        {
+          "id": "name",
+          "leftCorner": true,
+          "name": "Projeto",
+          "align": "left"
+        },
+        {
+          "id": "progress",
+          "middle": true,
+          "name": "Progresso",
+          "align": "center",
+          "type": "progress-bar"
+        },
+        {
+          "id": "daysLeft",
+          "rightCorner": true,
+          "name": "Dias restantes",
+          "align": "center"
+        }
+      ],
+      "rows": [
+        0
+      ]
     }
+  },
+  {
+    "id": 1,
+    "name": "Pedro Almeida",
+    "icon": "PA",
+    "photo": "face-03.jpg",
+    "phone_number": "912431231",
+    "email": "pedro.almeida@empresa.pt",
+    "job_description": "Programador Quase Sénior",
+    "schedule": "Seg. a Sex. 9h-18h",
+    "tickets": {
+      "headers": [
+        {
+          "id": "name",
+          "leftCorner": true,
+          "name": "Ticket",
+          "align": "left"
+        },
+        {
+          "id": "url",
+          "middle": true,
+          "name": "URL",
+          "align": "left"
+        },
+        {
+          "id": "priority",
+          "rightCorner": true,
+          "name": "Prioridade",
+          "align": "left"
+        }
+      ],
+      "rows": []
+    },
+    "processes": {
+      "headers": [
+        {
+          "id": "name",
+          "leftCorner": true,
+          "name": "Processo",
+          "align": "left"
+        },
+        {
+          "id": "nErrors",
+          "rightCorner": true,
+          "name": "Nº erros na última hora",
+          "align": "center"
+        }
+      ],
+      "rows": []
+    },
+    "areas": {
+      "headers": [
+        {
+          "id": "name",
+          "single": true,
+          "name": "Áreas",
+          "align": "left"
+        }
+      ],
+      "rows": [
+        0,
+        1
+      ]
+    },
+    "projects": {
+      "headers": [
+        {
+          "id": "name",
+          "leftCorner": true,
+          "name": "Projeto",
+          "align": "left"
+        },
+        {
+          "id": "progress",
+          "middle": true,
+          "name": "Progresso",
+          "align": "center",
+          "type": "progress-bar"
+        },
+        {
+          "id": "daysLeft",
+          "rightCorner": true,
+          "name": "Dias restantes",
+          "align": "center"
+        }
+      ],
+      "rows": [
+        0
+      ]
+    }
+  }
 ]
