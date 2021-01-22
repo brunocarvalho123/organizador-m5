@@ -2,12 +2,12 @@
   <div class="header-div">
     <div class="d-flex left-bar" v-on:click="goTohome()">
       <v-img
-          alt="Vuetify Logo"
+          alt="M05 Logo"
           class="shrink mr-2 logo"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          src="/assets/main_logo.png"
           transition="scale-transition"
-          width="40"/>
+          width="50"/>
     </div>
 
     <v-spacer></v-spacer>
@@ -23,8 +23,8 @@
 
 
     <v-spacer></v-spacer>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/area">Area</router-link>
+    <!-- <router-link to="/">Home</router-link> |
+    <router-link to="/area">Area</router-link> -->
   </div>
 </template>
 

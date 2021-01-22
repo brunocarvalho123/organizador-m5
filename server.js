@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const projects = require("./routes/api/projects");
+const processes = require("./routes/api/processes");
 const areas = require("./routes/api/areas");
 const employees = require("./routes/api/employees");
 
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use Routes
 app.use('/api/projects', projects);
+app.use('/api/processes', processes);
 app.use('/api/employees', employees);
 app.use('/api/areas', areas);
 

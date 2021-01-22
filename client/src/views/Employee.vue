@@ -41,7 +41,10 @@
                   height="36vh"
                   :headers="employee.processes.headers"
                   :items="employee.processes.rows"
-                  add-row="true"/>
+                  add-row="true"
+                  path="/process"
+                  @clickAdd="openProcessDialog"
+                  @deleteRow="deleteProcess"/>
       </v-col>
 
       <v-col cols="12" sm="6">
@@ -99,6 +102,27 @@
             Cancelar
           </v-btn>
           <v-btn color="var(--org-blue)" text @click="createProject()">
+            Criar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="processesDialog" width="500">
+      <v-card>
+        <v-card-title class="headline">
+          Adicionar processo
+        </v-card-title>
+        <v-card-text>
+          <v-text-field :name="Math.random()" color="var(--org-blue)" :label=dialogType v-model=dialogValue></v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="var(--org-grey)" text @click="processesDialog=false">
+            Cancelar
+          </v-btn>
+          <v-btn color="var(--org-blue)" text @click="createProcess()">
             Criar
           </v-btn>
         </v-card-actions>
@@ -232,8 +256,10 @@
       availableAreas: [],
       availableProjects: [],
       newProjects: [],
+      newProcesses: [],
       areasDialog: false,
-      projectsDialog: false
+      projectsDialog: false,
+      processesDialog: false
     }),
     mounted: function() {
       this.employeeId = this.$route.params.id;
@@ -293,12 +319,37 @@
         this.employee.projects.rows = this.employee.projects.rows.filter(project => project.id !== data.itemId);
         this.modified = true;
       },
+      openProcessDialog: function() {
+        this.dialogType = 'Processo';
+        this.dialogValue = '';
+        this.processesDialog = true;
+      },
+      createProcess: function() {
+        let newProcess = {id: this.getSuitableId(this.employee.processes.rows), name: this.dialogValue};
+        this.employee.processes.rows.push(newProcess);
+        this.newProcesses.push(newProcess);
+        this.modified = true;
+        this.dialogValue = '';
+        this.dialogType = '';
+        this.processesDialog = false;
+      },
+      deleteProcess: function(data) {
+        this.employee.processes.rows = this.employee.processes.rows.filter(Process => Process.id !== data.itemId);
+        this.modified = true;
+      },
       async saveData () {
         for (let idx = 0; idx < this.newProjects.length; idx++){
           let newProject = this.newProjects[idx];
           newProject.employee = this.employee.id;
           let response = await http.post('/projects', newProject);
           this.employee.projects.rows.filter(proj => proj.name === this.newProjects[idx].name)[0].id = response.data;
+        }
+
+        for (let idx = 0; idx < this.newProcesses.length; idx++){
+          let newProcess = this.newProcesses[idx];
+          newProcess.employee = this.employee.id;
+          let response = await http.post('/processes', newProcess);
+          this.employee.processes.rows.filter(proc => proc.name === this.newProcesses[idx].name)[0].id = response.data;
         }
 
         let payload = this.employee;
