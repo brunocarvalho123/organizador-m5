@@ -10,8 +10,26 @@
 
           <v-col class="info-container" cols="12" sm="6">
             <v-select class="info-input" v-model="project.area.id" color="var(--org-blue)" :items="availableAreas" label="Área" item-text="name" item-value="id" @change="changeArea"></v-select>
-            <v-text-field class="info-input" color="var(--org-blue)" label="Data de início" v-model=project.start_date @change="modified = true"></v-text-field>
-            <v-text-field class="info-input" color="var(--org-blue)" label="Conclusão prevista" v-model=project.end_date @change="modified = true"></v-text-field>
+            <v-menu v-model="startPicker" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field class="info-input" color="var(--org-blue)" label="Data de início" prepend-icon="mdi-calendar" readonly
+                  v-model="project.start_date"
+                  v-bind="attrs"
+                  v-on="on">
+                </v-text-field>
+              </template>
+              <v-date-picker v-model="project.start_date" color="var(--org-blue)" @change="modified = true" @input="startPicker = false"></v-date-picker>
+            </v-menu>
+            <v-menu v-model="endPicker" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field class="info-input" color="var(--org-blue)" label="Conclusão prevista" prepend-icon="mdi-calendar" readonly
+                  v-model="project.end_date"
+                  v-bind="attrs"
+                  v-on="on">
+                </v-text-field>
+              </template>
+              <v-date-picker v-model="project.end_date" color="var(--org-blue)" @change="modified = true" @input="endPicker = false"></v-date-picker>
+            </v-menu>
           </v-col>
 
           <v-col cols="12" sm="12">
@@ -225,6 +243,8 @@
     data: () => ({
       paramsId: 0,
       project: {loaded: false},
+      startPicker: false,
+      endPicker: false,
       notesDialog: false,
       tasksDialog: false,
       employeesDialog: false,

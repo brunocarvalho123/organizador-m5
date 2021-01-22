@@ -52,7 +52,7 @@ router.get('/:id', (req, res) => {
 
         if (project.start_date && project.end_date) {
           const todayDate = new Date();
-          const endDate = moment(project.end_date, "DD/MM/YYYY").toDate();
+          const endDate = moment(project.end_date, "YYYY-MM-DD").toDate();
 
           if (todayDate.getTime() <= endDate.getTime() ) {
             project.daysLeft = Math.round((endDate.getTime() - todayDate.getTime()) / (1000 * 3600 * 24));
