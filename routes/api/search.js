@@ -41,7 +41,6 @@ router.get('/:search_params', (req, res) => {
     const response = items.filter(item => item.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(req.params.search_params.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")));
     response.map((item,idx) => item.id = idx);
 
-    console.log(response);
     res.status(200).json(response);
   } catch (e) {
     res.status(400).json({ msg: e.message });
