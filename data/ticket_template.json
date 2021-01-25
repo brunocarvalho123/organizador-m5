@@ -1,0 +1,30 @@
+{
+  "id": -1,
+  "name": "",
+  "start_date": "",
+  "priority": "",
+  "url": "",
+  "summary": "",
+  "notes": {
+    "headers": [
+      {
+        "id": "notes",
+        "single": true,
+        "name": "Notas",
+        "align": "left"
+      }
+    ],
+    "rows": []
+  },
+  "employees": {
+    "headers": [
+      {
+        "id": "name",
+        "single": true,
+        "name": "Responsável",
+        "align": "left"
+      }
+    ],
+    "rows": []
+  }
+}

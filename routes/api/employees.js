@@ -146,7 +146,7 @@ router.put('/:id', async (req, res) => {
 
     req.body.areas.rows = req.body.areas.rows.map(area => area.id);
     req.body.projects.rows = req.body.projects.rows.map(project => project.id);
-    // req.body.tickets.rows = req.body.tickets.rows.map(ticket => ticket.id);
+    req.body.tickets.rows = req.body.tickets.rows.map(ticket => ticket.id);
     req.body.processes.rows = req.body.processes.rows.map(process => process.id);
 
     employees = employees.filter(emp => emp.id !== Number(req.params.id));

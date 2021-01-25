@@ -52,7 +52,10 @@
                   height="48vh"
                   :headers="employee.tickets.headers"
                   :items="employee.tickets.rows"
-                  add-row="true"/>
+                  add-row="true"
+                  path="/ticket"
+                  @clickAdd="openTicketDialog"
+                  @deleteRow="deleteTicket"/>
       </v-col>
       <v-col cols="12" sm="6">
         <OrgTable class="project-table"
@@ -102,6 +105,27 @@
             Cancelar
           </v-btn>
           <v-btn color="var(--org-blue)" text @click="createProject()">
+            Criar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="ticketsDialog" width="500">
+      <v-card>
+        <v-card-title class="headline">
+          Adicionar ticket
+        </v-card-title>
+        <v-card-text>
+          <v-text-field :name="Math.random()" color="var(--org-blue)" :label=dialogType v-model=dialogValue></v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="var(--org-grey)" text @click="ticketsDialog=false">
+            Cancelar
+          </v-btn>
+          <v-btn color="var(--org-blue)" text @click="createTicket()">
             Criar
           </v-btn>
         </v-card-actions>
@@ -257,9 +281,11 @@
       availableProjects: [],
       newProjects: [],
       newProcesses: [],
+      newTickets: [],
       areasDialog: false,
       projectsDialog: false,
-      processesDialog: false
+      processesDialog: false,
+      ticketsDialog: false
     }),
     mounted: function() {
       this.employeeId = this.$route.params.id;
@@ -337,6 +363,24 @@
         this.employee.processes.rows = this.employee.processes.rows.filter(Process => Process.id !== data.itemId);
         this.modified = true;
       },
+      openTicketDialog: function() {
+        this.dialogType = 'Ticket';
+        this.dialogValue = '';
+        this.ticketsDialog = true;
+      },
+      createTicket: function() {
+        let newticket = {id: this.getSuitableId(this.employee.tickets.rows), name: this.dialogValue};
+        this.employee.tickets.rows.push(newticket);
+        this.newTickets.push(newticket);
+        this.modified = true;
+        this.dialogValue = '';
+        this.dialogType = '';
+        this.ticketsDialog = false;
+      },
+      deleteTicket: function(data) {
+        this.employee.tickets.rows = this.employee.tickets.rows.filter(ticket => ticket.id !== data.itemId);
+        this.modified = true;
+      },
       async saveData () {
         for (let idx = 0; idx < this.newProjects.length; idx++){
           let newProject = this.newProjects[idx];
@@ -350,6 +394,13 @@
           newProcess.employee = this.employee.id;
           let response = await http.post('/processes', newProcess);
           this.employee.processes.rows.filter(proc => proc.name === this.newProcesses[idx].name)[0].id = response.data;
+        }
+
+        for (let idx = 0; idx < this.newTickets.length; idx++){
+          let newTicket = this.newTickets[idx];
+          newTicket.employee = this.employee.id;
+          let response = await http.post('/tickets', newTicket);
+          this.employee.tickets.rows.filter(tick => tick.name === this.newTickets[idx].name)[0].id = response.data;
         }
 
         let payload = this.employee;

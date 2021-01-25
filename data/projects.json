@@ -137,13 +137,13 @@
         },
         {
           "id": 7,
-          "done": true,
+          "done": false,
           "name": "tarefa5",
           "daysLeft": "12"
         },
         {
           "id": 8,
-          "done": true,
+          "done": false,
           "name": "tarefa4",
           "daysLeft": "222"
         },
