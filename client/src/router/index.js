@@ -51,7 +51,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Process.vue')
   },
   {
-    path: '/search',
+    path: '/search/:searchParams',
     name: 'Search',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

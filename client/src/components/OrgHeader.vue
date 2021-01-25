@@ -17,7 +17,9 @@
         dark
         class="search-bar"
         label="Pesquisar elementos"
-        append-icon="mdi-magnify">
+        append-icon="mdi-magnify"
+        v-model="searchValue"
+        @keypress="goSearch">
       </v-text-field>
     </div>
 
@@ -62,10 +64,16 @@
     name: 'OrgHeader',
 
     data: () => ({
+      searchValue: ""
     }),
     methods: {
       goTohome: function() {
         this.$router.push('/');
+      },
+      goSearch: function(event) {
+        if (this.searchValue && event && event.key === "Enter" && this.searchValue !== this.$route.params.searchParams) {
+          this.$router.push(`/search/${this.searchValue}`);
+        }
       }
     }
   }

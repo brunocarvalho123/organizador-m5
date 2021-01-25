@@ -7,6 +7,7 @@ const processes = require("./routes/api/processes");
 const tickets = require("./routes/api/tickets");
 const areas = require("./routes/api/areas");
 const employees = require("./routes/api/employees");
+const search = require("./routes/api/search");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/api/processes', processes);
 app.use('/api/tickets', tickets);
 app.use('/api/employees', employees);
 app.use('/api/areas', areas);
+app.use('/api/search', search);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
