@@ -117,6 +117,7 @@ router.post('/', async (req, res) => {
     if (!req.body.hasOwnProperty('name')) throw Error('name not defined');
     processTemplate.name = req.body.name;
     if (req.body.employee !== undefined) processTemplate.employees.rows = [req.body.employee];
+    if (req.body.area !== undefined) processTemplate.area = req.body.area;
     processTemplate.id = getSuitableId(processes);
 
     processes.push(processTemplate);

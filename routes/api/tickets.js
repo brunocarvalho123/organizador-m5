@@ -117,6 +117,7 @@ router.post('/', async (req, res) => {
     if (!req.body.hasOwnProperty('name')) throw Error('name not defined');
     ticketTemplate.name = req.body.name;
     if (req.body.employee !== undefined) ticketTemplate.employees.rows = [req.body.employee];
+    if (req.body.area !== undefined) ticketTemplate.area = req.body.area;
     ticketTemplate.id = getSuitableId(tickets);
 
     tickets.push(ticketTemplate);
