@@ -26,7 +26,7 @@
       <div v-for="(area, idx) in areas" v-bind:key="idx" class="area-box" @click="goToArea(area.id)">
         <div class="area-header">
           {{area.name}}
-          <v-icon color="white" size="3.5vh">
+          <v-icon color="white" size="3.5vh" @click="deleteArea($event, area.id)">
             mdi-close-circle
           </v-icon>
         </div>
@@ -59,7 +59,7 @@
       </div>
 
       <div class="new-area" @click="createArea">
-        <v-icon color="var(--org-blue)" size="15vh">
+        <v-icon color="var(--org-grey)" size="13vh">
           mdi-plus-circle
         </v-icon>
       </div>
@@ -224,6 +224,10 @@
       },
       createArea: function() {
 
+      },
+      deleteArea: function(event, id) {
+        event.stopPropagation();
+        console.log(id);
       },
       goToEmployee: function(id) {
         this.$router.push(`employee/${id}`);

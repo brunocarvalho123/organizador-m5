@@ -101,6 +101,10 @@
     background-color: rgba(0, 0, 0, .05);
   }
 
+  tbody {
+    box-shadow: 0px 0px 5px 1px rgba(56, 56, 56, 0.274);
+  }
+
   .sort-icon {
     font-size: 11pt;
     color: var(--org-light-blue)
