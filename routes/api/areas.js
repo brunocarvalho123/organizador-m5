@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     const areas = JSON.parse(areasRaw);
     if (!areas) throw Error('No areas');
 
-    res.status(200).json(areas);
+    res.status(200).json(areas.sort((a, b) => a.id - b.id));
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }
