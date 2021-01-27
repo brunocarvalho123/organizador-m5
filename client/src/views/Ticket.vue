@@ -6,6 +6,8 @@
         <v-row no-gutters>
           <v-col cols="12" sm="6">
             <OrgTextField width="100%" label="Ticket" v-model=ticket.name @change="changeName"/>
+
+            <v-text-field class="url-input" color="var(--org-blue)" label="URL" v-model="ticket.url" @change="modified = true"></v-text-field>
           </v-col>
 
           <v-col class="info-container" cols="12" sm="6">
@@ -182,6 +184,10 @@
     margin-bottom: 6vh;
     margin-right: 10vh;
     background-color: white;
+  }
+
+  .url-input {
+    padding: 3vh;
   }
 </style>
 
