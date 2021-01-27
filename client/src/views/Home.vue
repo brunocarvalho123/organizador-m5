@@ -14,7 +14,7 @@
         </v-avatar>
       </div>
 
-      <div class="add-row" @click="createEmployee">
+      <div class="add-row" @click="dialogValue=''; employeeDialog = true">
         <v-icon class="plus-icon" color="var(--org-blue)" size="3.5vh">
           mdi-plus-circle
         </v-icon>
@@ -26,7 +26,7 @@
       <div v-for="(area, idx) in areas" v-bind:key="idx" class="area-box" @click="goToArea(area.id)">
         <div class="area-header">
           {{area.name}}
-          <v-icon color="white" size="3.5vh" @click="deleteArea($event, area.id)">
+          <v-icon color="white" size="3.5vh" @click="openDeleteAreaDialog($event, area.id)">
             mdi-close-circle
           </v-icon>
         </div>
@@ -58,12 +58,74 @@
         </div>
       </div>
 
-      <div class="new-area" @click="createArea">
+      <div class="new-area" @click="dialogValue=''; areaDialog = true">
         <v-icon color="var(--org-grey)" size="13vh">
           mdi-plus-circle
         </v-icon>
       </div>
     </div>
+
+    <v-dialog v-model="employeeDialog" width="500">
+      <v-card>
+        <v-card-title class="headline">
+          Criar Colaborador
+        </v-card-title>
+        <v-card-text>
+          <v-text-field :name="Math.random()" color="var(--org-blue)" label='Nome' v-model=dialogValue></v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="var(--org-grey)" text @click="employeeDialog=false">
+            Cancelar
+          </v-btn>
+          <v-btn color="var(--org-blue)" text @click="createEmployee()">
+            Criar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="areaDialog" width="500">
+      <v-card>
+        <v-card-title class="headline">
+          Criar Área
+        </v-card-title>
+        <v-card-text>
+          <v-text-field :name="Math.random()" color="var(--org-blue)" label='Nome' v-model=dialogValue></v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="var(--org-grey)" text @click="areaDialog=false">
+            Cancelar
+          </v-btn>
+          <v-btn color="var(--org-blue)" text @click="createArea()">
+            Criar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="deleteAreaDialog" width="400">
+      <v-card>
+        <v-card-title class="headline">
+          Confirme
+        </v-card-title>
+        <v-card-text class="headline">
+          Tem a certeza de que pretende eliminar esta área?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="var(--org-grey)" text @click="deleteAreaDialog=false">
+            Cancelar
+          </v-btn>
+          <v-btn color="red" text @click="deleteArea()">
+            Eliminar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
   </v-container>
   <v-container v-else class="spinner">
@@ -200,13 +262,18 @@
     data: () => ({
       dashboard: {loaded: false},
       employees: [],
-      areas: []
+      areas: [],
+      employeeDialog: false,
+      areaDialog: false,
+      dialogValue: '',
+      deleteAreaDialog: false
     }),
     mounted: function() {
       this.reloadData();
     },
     methods: {
       reloadData: function() {
+        this.dialogValue = '';
         http.get(`/areas`).then(response => {
           this.areas = response.data;
           http.get(`/employees`).then(response2 => {
@@ -220,14 +287,42 @@
         });
       },
       createEmployee: function() {
-
+        if (this.dialogValue) {
+          http.post('/employees', {name: this.dialogValue}).then(() => {
+            this.employeeDialog = false;
+            this.reloadData();
+          }).catch(err => {
+            this.employeeDialog = false;
+            console.log(err);
+          });
+        }
       },
       createArea: function() {
-
+        if (this.dialogValue) {
+          http.post('/areas', {name: this.dialogValue}).then(() => {
+            this.areaDialog = false;
+            this.reloadData();
+          }).catch(err => {
+            this.areaDialog = false;
+            console.log(err);
+          });
+        }
       },
-      deleteArea: function(event, id) {
+      openDeleteAreaDialog: function(event, id) {
         event.stopPropagation();
-        console.log(id);
+        this.deleteAreaDialog = true;
+        this.dialogValue = id;
+      },
+      deleteArea: function() {
+        if (this.dialogValue) {
+          http.delete(`/areas/${this.dialogValue}`).then(() => {
+            this.deleteAreaDialog = false;
+            this.reloadData();
+          }).catch(err => {
+            this.deleteAreaDialog = false;
+            console.log(err);
+          });
+        }
       },
       goToEmployee: function(id) {
         this.$router.push(`employee/${id}`);

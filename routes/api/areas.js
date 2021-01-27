@@ -6,8 +6,11 @@ const fs = require('fs');
 const employeesFile = './data/employees.json';
 const projectsFile = './data/projects.json';
 const areasFile = './data/areas.json';
+const areaTemplateFile = './data/area_template.json';
 const processesFile = './data/processes.json';
 const ticketsFile = './data/tickets.json';
+
+const getSuitableId = require('../../common/common_functions')
 
 
 /**
@@ -171,14 +174,18 @@ router.post('/', async (req, res) => {
     const areas = JSON.parse(areasRaw);
     if (!areas) throw Error('No areas');
 
-    if (!req.body.hasOwnProperty('id')) throw Error('Id not defined');
-    if (areas.filter(are => are.id === Number(req.body.id)).length > 0) throw Error('area already exists');
+    let areaTemplate = JSON.parse(fs.readFileSync(areaTemplateFile));
+    if (!areaTemplate) throw Error('No areaTemplate');
 
-    areas.push(req.body);
+    if (!req.body.hasOwnProperty('name') && !req.body.name) throw Error('name not defined');
+    areaTemplate.name = req.body.name;
+    areaTemplate.id = getSuitableId(areas);
+
+    areas.push(areaTemplate);
 
     const payload = JSON.stringify(areas, null, 2);
     fs.writeFileSync(areasFile, payload);
-    res.status(200).json(req.body);
+    res.status(200).json(areaTemplate.id);
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }

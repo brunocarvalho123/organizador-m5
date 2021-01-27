@@ -102,7 +102,7 @@
   }
 
   tbody {
-    box-shadow: 0px 0px 5px 1px rgba(56, 56, 56, 0.274);
+    box-shadow: -5px 0px 5px 1px rgba(56, 56, 56, 0.274);
   }
 
   .sort-icon {

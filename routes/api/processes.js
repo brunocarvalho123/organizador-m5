@@ -38,31 +38,30 @@ router.get('/:id', (req, res) => {
     const processes = JSON.parse(processesRaw);
     if (!processes) throw Error('No processes');
 
-    const process = processes.filter(proj => proj.id === Number(req.params.id))[0];
+    const process = processes.filter(proc => proc.id === Number(req.params.id))[0];
     if (!process) throw Error('process not found');
 
-    if (process.employees.rows.length > 0) {
-      const employees = JSON.parse(fs.readFileSync(employeesFile));
-      if (!employees) throw Error('No employees');
+    const employees = JSON.parse(fs.readFileSync(employeesFile));
+    if (!employees) throw Error('No employees');
 
-      process.employees.rows = employees.filter(employee => process.employees.rows.includes(employee.id));
-      const employeeHeaders = process.employees.headers.map(header => header.id);
-      employeeHeaders.push('id');
+    // process.employees.rows = employees.filter(employee => process.employees.rows.includes(employee.id));
+    process.employees.rows = employees.filter(employee => employee.processes.rows.includes(process.id));
+    const employeeHeaders = process.employees.headers.map(header => header.id);
+    employeeHeaders.push('id');
 
-      process.employees.rows.forEach(employee => {
-        Object.keys(employee).forEach(key => {
-          if (!employeeHeaders.includes(key)) {
-            delete employee.key;
-          }
-        });
+    process.employees.rows.forEach(employee => {
+      Object.keys(employee).forEach(key => {
+        if (!employeeHeaders.includes(key)) {
+          delete employee.key;
+        }
       });
-    }
+    });
 
-    if (process.area !== undefined && process.area !== -1) {
-      const areas = JSON.parse(fs.readFileSync(areasFile));
-      if (!areas) throw Error('No areas');
-      process.area = {id: process.area, name: areas.filter(area => process.area === area.id)[0].name}
-    }
+    const areas = JSON.parse(fs.readFileSync(areasFile));
+    if (!areas) throw Error('No areas');
+    // process.area = {id: process.area, name: areas.filter(area => process.area === area.id)[0].name}
+    const proc_area = areas.filter(area => area.processes.rows.includes(process.id))[0];
+    if (proc_area) process.area = {id: proc_area.id, name: proc_area.name};
 
     res.status(200).json(process);
   } catch (e) {
@@ -81,14 +80,44 @@ router.put('/:id', async (req, res) => {
     let processes = JSON.parse(processesRaw);
     if (!processes) throw Error('No processes');
 
-    if (processes.filter(proj => proj.id === Number(req.params.id)).length <= 0) throw Error('process not found');
+    if (processes.filter(proc => proc.id === Number(req.params.id)).length <= 0) throw Error('process not found');
     if (Number(req.body.id) !== Number(req.params.id)) throw Error('Cant update id');
     if (!req.body.hasOwnProperty('id')) throw Error('Id not defined');
 
-    req.body.area = req.body.area.id;
-    req.body.employees.rows = req.body.employees.rows.map(emp => emp.id);
+    if (req.body.area.id !== undefined) {
+      let areas = JSON.parse(fs.readFileSync(areasFile));
+      if (!areas) throw Error('No areas');
+      const proc_area = areas.filter(area => area.id === Number(req.body.area.id))[0];
 
-    processes = processes.filter(proj => proj.id !== Number(req.params.id));
+      proc_area.processes.rows.filter(item => item !== Number(req.params.id));
+      proc_area.processes.rows.push(Number(req.params.id));
+
+      areas = areas.filter(are => are.id !== Number(proc_area.id));
+      areas.push(proc_area);
+      let payload = JSON.stringify(areas, null, 2);
+      fs.writeFileSync(areasFile, payload);
+      req.body.area = -1;
+    }
+
+    req.body.employees.rows = req.body.employees.rows.map(emp => emp.id);
+    if (req.body.employees.rows.length > 0) {
+      let employees = JSON.parse(fs.readFileSync(employeesFile));
+      if (!employees) throw Error('No employees');
+      let proc_employees = employees.filter(employee => req.body.employees.rows.includes(employee.id));
+
+      proc_employees.forEach(employee => {
+        employee.processes.rows.indexOf(Number(req.params.id)) === -1 ? employee.processes.rows.push(Number(req.params.id)) : console.log("");
+      });
+
+      employees = employees.filter(emp => !proc_employees.includes(emp.id));
+      employees.concat(proc_employees);
+
+      let payload = JSON.stringify(employees, null, 2);
+      fs.writeFileSync(employeesFile, payload);
+      req.body.employees.rows = [];
+    }
+
+    processes = processes.filter(proc => proc.id !== Number(req.params.id));
     processes.push(req.body);
 
     let payload = JSON.stringify(processes, null, 2);
@@ -116,8 +145,6 @@ router.post('/', async (req, res) => {
 
     if (!req.body.hasOwnProperty('name')) throw Error('name not defined');
     processTemplate.name = req.body.name;
-    if (req.body.employee !== undefined) processTemplate.employees.rows = [req.body.employee];
-    if (req.body.area !== undefined) processTemplate.area = req.body.area;
     processTemplate.id = getSuitableId(processes);
 
     processes.push(processTemplate);
@@ -142,9 +169,9 @@ router.delete('/:id', async (req, res) => {
     const processes = JSON.parse(processesRaw);
     if (!processes) throw Error('No processes');
 
-    if (processes.filter(proj => proj.id === Number(req.params.id)).length <= 0) throw Error('process not found');
+    if (processes.filter(proc => proc.id === Number(req.params.id)).length <= 0) throw Error('process not found');
 
-    const payload = JSON.stringify(processes.filter(proj => proj.id !== Number(req.params.id)), null, 2);
+    const payload = JSON.stringify(processes.filter(proc => proc.id !== Number(req.params.id)), null, 2);
     fs.writeFileSync(processesFile, payload);
     res.status(200).json({ success: true });
   } catch (e) {

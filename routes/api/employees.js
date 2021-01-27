@@ -4,10 +4,13 @@ const router = express.Router();
 const fs = require('fs');
 
 const employeesFile = './data/employees.json';
+const employeeTemplateFile = './data/employee_template.json';
 const projectsFile = './data/projects.json';
 const areasFile = './data/areas.json';
 const processesFile = './data/processes.json';
 const ticketsFile = './data/tickets.json';
+
+const getSuitableId = require('../../common/common_functions')
 
 /**
  * @route   GET api/employees
@@ -19,7 +22,7 @@ router.get('/', (req, res) => {
     const employees = JSON.parse(fs.readFileSync(employeesFile));
     if (!employees) throw Error('No employees');
 
-    res.status(200).json(employees);
+    res.status(200).json(employees.sort((a, b) => a.id - b.id));
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }
@@ -169,18 +172,21 @@ router.put('/:id', async (req, res) => {
 */
 router.post('/', async (req, res) => {
   try {
-    const employeesRaw = fs.readFileSync(employeesFile);
-    const employees = JSON.parse(employeesRaw);
+    const employees = JSON.parse(fs.readFileSync(employeesFile));
     if (!employees) throw Error('No employees');
 
-    if (!req.body.hasOwnProperty('id')) throw Error('Id not defined');
-    if (employees.filter(emp => emp.id === Number(req.body.id)).length > 0) throw Error('employee already exists');
+    let employeeTemplate = JSON.parse(fs.readFileSync(employeeTemplateFile));
+    if (!employeeTemplate) throw Error('No employeeTemplate');
 
-    employees.push(req.body);
+    if (!req.body.hasOwnProperty('name') && !req.body.name) throw Error('name not defined');
+    employeeTemplate.name = req.body.name;
+    employeeTemplate.id = getSuitableId(employees);
+
+    employees.push(employeeTemplate);
 
     const payload = JSON.stringify(employees, null, 2);
     fs.writeFileSync(employeesFile, payload);
-    res.status(200).json(req.body);
+    res.status(200).json(employeeTemplate.id);
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }
