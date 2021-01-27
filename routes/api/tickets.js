@@ -87,7 +87,7 @@ router.put('/:id', async (req, res) => {
     if (req.body.area.id !== undefined) {
       let areas = JSON.parse(fs.readFileSync(areasFile));
       if (!areas) throw Error('No areas');
-      const proj_area = areas.filter(area => area.id === Number(req.body.area.id))[0];
+      const ticket_area = areas.filter(area => area.id === Number(req.body.area.id))[0];
 
       ticket_area.tickets.rows.filter(item => item !== Number(req.params.id));
       ticket_area.tickets.rows.push(Number(req.params.id));

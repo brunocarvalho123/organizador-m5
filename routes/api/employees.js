@@ -147,10 +147,26 @@ router.put('/:id', async (req, res) => {
     if (Number(req.body.id) !== Number(req.params.id)) throw Error('Cant update id');
     if (!req.body.hasOwnProperty('id')) throw Error('Id not defined');
 
-    req.body.areas.rows = req.body.areas.rows.map(area => area.id);
     req.body.projects.rows = req.body.projects.rows.map(project => project.id);
     req.body.tickets.rows = req.body.tickets.rows.map(ticket => ticket.id);
     req.body.processes.rows = req.body.processes.rows.map(process => process.id);
+
+    req.body.areas.rows = req.body.areas.rows.map(area => area.id);
+    if (req.body.areas.rows.length > 0) {
+      let areas = JSON.parse(fs.readFileSync(areasFile));
+      if (!areas) throw Error('No areas');
+      let emp_areas = areas.filter(area => req.body.areas.rows.includes(area.id));
+
+      emp_areas.forEach(area => {
+        area.employees.rows.indexOf(Number(req.params.id)) === -1 ? area.employees.rows.push(Number(req.params.id)) : console.log("");
+      });
+
+      areas = areas.filter(emp => !emp_areas.includes(emp.id));
+      areas.concat(emp_areas);
+
+      let payload = JSON.stringify(areas, null, 2);
+      fs.writeFileSync(areasFile, payload);
+    }
 
     employees = employees.filter(emp => emp.id !== Number(req.params.id));
     employees.push(req.body);
